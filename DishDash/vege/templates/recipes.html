@@ -12,7 +12,7 @@
         <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <h2>Add Recipes</h2>
+            <h2 style="color: blueviolet;">Add Recipes</h2>
             <hr>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Recipe name</label>
@@ -33,13 +33,14 @@
           </form>
     
 
-          <table class="table">
+          <table class="table mt-5" border="7">
             <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Recipe Name</th>
                 <th scope="col">Recipe Description</th>
                 <th scope="col">Image</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -48,8 +49,12 @@
                 <th scope="row">{{forloop.counter}}</th>
                 <td>{{recipe.recipe_name}}</td>
                 <td>{{recipe.recipe_description}}</td>
-                <td>{{recipe.recipe_image}}</td>
-              </tr>
+                <td>
+                  <img src="/media/{{recipe.recipe_image}}" style="height: 150px;"></td>
+                <td>
+                  <button class="btn btn-danger"> Delete</button>
+                </td>
+                </tr>
               {% endfor %}
             </tbody>
           </table>

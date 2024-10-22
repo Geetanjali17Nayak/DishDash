@@ -114,12 +114,19 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+import os
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR , 'staticfiles')
+STATICFILES_DIR= os.path.join(BASE_DIR , "public/static")
+
+# Media files (uploaded images, files, etc.)
+MEDIA_URL = '/media/'  # Public URL for accessing media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'public/static')  # Path where media files will be stored
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
