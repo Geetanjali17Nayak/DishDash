@@ -2,6 +2,7 @@ from django.shortcuts import render , redirect
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth import authenticate , login
 
 # Create your views here.
 def recipe(request):
@@ -69,7 +70,31 @@ def delete_recipe(request, id): # id provide dynamic url/route
      queryset.delete()
      return redirect('/recipes/')
     
-def login(request):
+def login_page(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if not User.objects.filter(username = username).exists():
+             messages.error(request, "Invalid Username")
+             return redirect('/login_page/')
+
+        
+        user = authenticate(username=username , password=password)
+
+        if user is None:
+             messages.error(request, "Invalid Password")
+             return redirect('/login_page/')
+        
+        else:
+            login(request , user)
+            return redirect('/recipes/')
+
+        
+
+
+
+
     return render(request , 'login.html')
 
 def register(request):
