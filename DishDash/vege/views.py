@@ -2,9 +2,11 @@ from django.shortcuts import render , redirect
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate , login
+from django.contrib.auth import authenticate , login , logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url="/login_page/")
 def recipe(request):
     if request.method=="POST":
        data =request.POST
@@ -89,13 +91,14 @@ def login_page(request):
         else:
             login(request , user)
             return redirect('/recipes/')
-
-        
-
-
-
-
+   
     return render(request , 'login.html')
+
+def logout_page(request):
+    logout(request)
+    return redirect('/login_page/')
+
+
 
 def register(request):
     if request.method == "POST":
