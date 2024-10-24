@@ -9,8 +9,17 @@
 <body>
 
     <div class="container mt-5">
+
+      <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <div class="mx-auto">
+            <span class="navbar-brand mb-0 h1 fw-bold" style="font-size: 4rem; color: #0d3b68;">DishDash</span>
+          </div>
+          
+        </div>
+      </nav>
         
-        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+        <form class="col-6 mx-auto card p-3 shadow-lg mt-5" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <h2 style="color: blueviolet;">Register</h2>
@@ -50,7 +59,7 @@
             </div>
             <p>Already have account <a href="/login_page/"> login </a></p>
             
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Register</button>
           </form>
     
 
