@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate , login , logout
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+
 
 # Create your views here.
 @login_required(login_url="/login_page/")
@@ -38,8 +40,11 @@ def recipe(request):
     return render(request , 'recipes.html', context)
 
 def update_recipe(request, id):
+     
      print("Request Object: ", request)  # Debugging statement
      queryset = Recipe.objects.get(id=id)
+     if not request.user.has_permission('vege.update_recipe'):
+          raise PermissionDenied("You don't have permission to update recipes.")
 
      if request.method == "POST":
           data =request.POST
@@ -69,6 +74,9 @@ def update_recipe(request, id):
 def delete_recipe(request, id): # id provide dynamic url/route
      print("Request Object: ", request)  # Debugging statement
      queryset = Recipe.objects.get(id=id)
+     if not request.user.has_perm('vege.delete_recipe'):
+      raise PermissionDenied("You don't have permission to delete recipes.")
+     
      queryset.delete()
      return redirect('/recipes/')
     
