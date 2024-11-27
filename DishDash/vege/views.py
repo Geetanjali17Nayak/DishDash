@@ -43,7 +43,7 @@ def update_recipe(request, id):
      
      print("Request Object: ", request)  # Debugging statement
      queryset = Recipe.objects.get(id=id)
-     if not request.user.has_permission('vege.update_recipe'):
+     if not request.user.has_perm('vege.update_recipe'):
           raise PermissionDenied("You don't have permission to update recipes.")
 
      if request.method == "POST":
